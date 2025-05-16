@@ -9,7 +9,8 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
+    needs:
+      - build
     steps:
       - uses: actions/checkout@v4
-      - run: npm clean-install
       - run: npm run e2e:headless
