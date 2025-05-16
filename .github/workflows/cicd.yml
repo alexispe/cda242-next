@@ -1,0 +1,9 @@
+on: [push]
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm clean-install
+      - run: npm run build
+      - run: npm run e2e:headless
