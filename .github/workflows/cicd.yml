@@ -29,7 +29,14 @@ jobs:
           key: ${{ runner.os }}-node_modules-${{ hashFiles('**/package-lock.json') }}
       - run: npm run e2e:headless
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: cypress-videos
           path: cypress/videos
+          retention-days: 5
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
           retention-days: 5
