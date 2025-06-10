@@ -1,0 +1,6 @@
+services:
+  next:
+    image: ghcr.io/alexispe/cda242-next/next:latest
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
