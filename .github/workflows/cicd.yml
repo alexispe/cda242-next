@@ -50,6 +50,8 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
+    needs:
+      - test
     steps:
       - uses: appleboy/ssh-action@v1
         with:
@@ -64,3 +66,27 @@ jobs:
             npm install
             npm run build
             pm2 restart npm
+            
+            
+
+
+  build-push-docker:
+    runs-on: ubuntu-latest
+    # needs: [test]
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: ghcr.io/alexispe/cda242-next/next:latest
