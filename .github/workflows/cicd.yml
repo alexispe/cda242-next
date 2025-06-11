@@ -97,6 +97,9 @@ jobs:
   deploy-docker-prod:
     runs-on: ubuntu-latest
     if: ${{ github.ref_name == 'main' }}
+    environment:
+      name: prod
+      url: http://${{ secrets.SSH_HOST }}/
     needs:
       - build-push-docker
     steps:
@@ -114,6 +117,9 @@ jobs:
   deploy-docker-test:
     runs-on: ubuntu-latest
     if: ${{ github.ref_name == 'develop' }}
+    environment:
+      name: test
+      url: http://${{ secrets.SSH_HOST }}:3000
     needs:
       - build-push-docker
     steps:
