@@ -17,4 +17,9 @@ RUN npm run build
 
 EXPOSE 3000
 
-CMD npm run start
+COPY docker/next/entrypoint.sh /usr/local/bin/entrypoint
+RUN chmod +x /usr/local/bin/entrypoint
+
+ENTRYPOINT [ "entrypoint" ]
+CMD [ "npm", "run", "start" ]
+
