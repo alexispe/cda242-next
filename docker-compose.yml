@@ -1,6 +1,8 @@
 services:
   next:
-    build: .
+    build:
+      context: .
+      target: next
     ports:
       - "3000:3000"
     environment:
