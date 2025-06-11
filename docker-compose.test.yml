@@ -1,8 +1,8 @@
 services:
   next:
-    image: ghcr.io/alexispe/cda242-next/next:main
+    image: ghcr.io/alexispe/cda242-next/next:develop
     restart: unless-stopped
     ports:
-      - "80:3000"
+      - "3000:3000"
     environment:
       - NODE_ENV=production
