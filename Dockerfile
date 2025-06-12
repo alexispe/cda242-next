@@ -1,6 +1,5 @@
 FROM node:24.2-alpine3.21 AS builder
 
-LABEL org.opencontainers.image.source=https://github.com/alexispe/cda242-next
 
 ADD . /app/
 
@@ -10,6 +9,8 @@ RUN npm install
 RUN npm run build
 
 FROM node:24.2-alpine3.21 AS next
+
+LABEL org.opencontainers.image.source=https://github.com/alexispe/cda242-next
 
 COPY --from=builder /app/public ./public
 
