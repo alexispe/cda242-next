@@ -2,7 +2,16 @@ services:
   next:
     image: ghcr.io/alexispe/cda242-next/next:develop
     restart: unless-stopped
-    ports:
-      - "3000:3000"
     environment:
       - NODE_ENV=production
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.next-test.rule=Host(`13.38.214.84`)"
+      - "traefik.http.routers.next-test.entrypoints=web"
+    networks:
+      - web
+
+networks:
+  web:
+    name: web
+    external: true
